@@ -1,0 +1,72 @@
+// Get the elements we need to interact with
+const questionInput = document.getElementById('question-input');
+const askQuestionBtn = document.getElementById('ask-question-btn');
+const modelSelection = document.querySelectorAll('.model-selection a');
+const responseDisplay = document.getElementById('response-display');
+const tokenBalance = document.querySelector('.token-balance h2');
+const buyTokensBtn = document.getElementById('buy-tokens-btn');
+
+// Add an event listener to the question input
+questionInput.addEventListener('input', () => {
+    // Get the current value of the question input
+    const currentValue = questionInput.value;
+    // If the value is not empty, enable the ask question button
+    if (currentValue !== '') {
+        askQuestionBtn.disabled = false;
+    } else {
+        askQuestionBtn.disabled = true;
+    }
+});
+
+// Add click handlers for model selection
+modelSelection.forEach(model => {
+    model.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Remove active class from all models
+        modelSelection.forEach(m => m.classList.remove('active'));
+        // Add active class to clicked model
+        model.classList.add('active');
+    });
+});
+
+// Add an event listener to the ask question button
+askQuestionBtn.addEventListener('click', () => {
+    // Get the current value of the question input
+    const currentValue = questionInput.value;
+    // Get the selected model from the model selection list
+    const selectedModel = document.querySelector('.model-selection a.active').getAttribute('data-model');
+    
+    // Send a request to the API with the question and selected model
+    fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: currentValue, model: selectedModel }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        // Display the response from the API
+        responseDisplay.innerHTML = data.response;
+        // Update the token balance
+        tokenBalance.textContent = `Token Balance: ${data.tokens} tokens`;
+    })
+    .catch((error) => {
+        responseDisplay.innerHTML = 'Error: ' + error.message;
+    });
+});
+
+// Add an event listener to the buy tokens button
+buyTokensBtn.addEventListener('click', () => {
+    // Send a request to the API to purchase tokens
+    fetch('/api/buy-tokens', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        // Update the token balance
+        tokenBalance.textContent = `Token Balance: ${data.tokens} tokens`;
+    })
+    .catch((error) => {
+        console.error('Error buying tokens:', error);
+    });
+});

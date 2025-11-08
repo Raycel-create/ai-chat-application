@@ -1,0 +1,66 @@
+
+
+
+    
+    
+    Emergent AI
+    
+
+
+    
+    
+        
+            
+                Home
+                About
+                FAQ
+            
+            
+                ☁
+                ☎
+            
+        
+    
+
+    
+    
+        Emergent AI
+        Ask us anything!
+        
+        Ask Question
+
+        
+        
+            Select a Model:
+            
+                Claude
+                OpenAI
+                DeepSeek
+                Grok
+            
+        
+
+        
+        
+            Response:
+            
+        
+
+        
+        
+            Token Balance: 0 tokens
+            You have used 0 tokens out of your free 3 questions.
+            Buy Tokens ($0.01/10 tokens)
+        
+
+        
+        
+            Subscription:
+            Get unlimited access to our AI models for just $1/month!
+            Subscribe Now
+        
+    
+
+    
+    
+

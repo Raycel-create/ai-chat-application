@@ -1,0 +1,21 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Sample API to simulate asking questions and purchasing tokens
+@app.route('/api/ask', methods=['POST'])
+def ask():
+    data = request.get_json()
+    question = data['question']
+    model = data['model']
+    # Simulate the AI response
+    response = f"Response from {model}: {question}"
+    return jsonify({'response': response, 'tokens': 10})
+
+@app.route('/api/buy-tokens', methods=['POST'])
+def buy_tokens():
+    # Simulate purchasing tokens
+    return jsonify({'tokens': 10})
+
+if __name__ == '__main__':
+    app.run(debug=True)
