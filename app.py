@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
-@app.route('/')
-def home():
-    return app.send_static_file('index.html')
     
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    with open('index.html','r') as f:
+        return f.read()
 
 # Sample API to simulate asking questions and purchasing tokens
 @app.route('/api/ask', methods=['POST'])
